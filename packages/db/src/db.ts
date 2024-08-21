@@ -2,11 +2,8 @@
 // This approach is taken from https://github.com/vercel/next.js/tree/canary/examples/with-mongodb
 import { MongoClient, ServerApiVersion } from "mongodb";
 
-if (!process.env.MONGODB_URI) {
-  throw new Error('Invalid/Missing environment variable: "MONGODB_URI"');
-}
-
-const uri = process.env.MONGODB_URI;
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const uri = process.env.MONGODB_URI! || "";
 const options = {
   serverApi: {
     version: ServerApiVersion.v1,

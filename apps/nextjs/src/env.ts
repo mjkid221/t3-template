@@ -17,7 +17,7 @@ export const env = createEnv({
    * This way you can ensure the app isn't built with invalid env vars.
    */
   server: {
-    MONGODB_URI: z.string().url(),
+    // MONGODB_URI: z.string().url(),
   },
 
   /**
