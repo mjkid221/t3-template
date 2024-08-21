@@ -4,10 +4,7 @@ import type {
   Session as NextAuthSession,
 } from "next-auth";
 import { skipCSRFCheck } from "@auth/core";
-import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import Discord from "next-auth/providers/discord";
-
-import clientPromise from "@acme/db/db";
 
 import { env } from "../env";
 
@@ -19,12 +16,12 @@ declare module "next-auth" {
   }
 }
 
-const adapter = MongoDBAdapter(clientPromise);
+// const adapter = MongoDBAdapter(clientPromise);
 
 export const isSecureContext = env.NODE_ENV !== "development";
 
 export const authConfig = {
-  adapter,
+  // adapter,
   // In development, we need to skip checks to allow Expo to work
   ...(!isSecureContext
     ? {
@@ -37,20 +34,13 @@ export const authConfig = {
 } satisfies NextAuthConfig;
 
 export const validateToken = async (
-  token: string,
+  _: string,
+  // eslint-disable-next-line @typescript-eslint/require-await
 ): Promise<NextAuthSession | null> => {
-  const sessionToken = token.slice("Bearer ".length);
-  const session = await adapter.getSessionAndUser?.(sessionToken);
-  return session
-    ? {
-        user: {
-          ...session.user,
-        },
-        expires: session.session.expires.toISOString(),
-      }
-    : null;
+  // Implement
+  return null;
 };
 
-export const invalidateSessionToken = async (token: string) => {
-  await adapter.deleteSession?.(token);
+export const invalidateSessionToken = async (_: string) => {
+  // Implement
 };
