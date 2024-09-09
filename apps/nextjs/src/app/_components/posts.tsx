@@ -25,6 +25,7 @@ export function CreatePostForm() {
       title: "",
     },
   });
+  console.log("");
 
   const utils = api.useUtils();
   const createPost = api.post.create.useMutation({
